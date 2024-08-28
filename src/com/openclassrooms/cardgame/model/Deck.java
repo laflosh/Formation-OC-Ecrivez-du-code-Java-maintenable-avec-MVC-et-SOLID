@@ -27,7 +27,7 @@ public class Deck {
 		
 	}
 
-	private void shuffle() {
+	public void shuffle() {
 		
 		Random random = new Random();
 		
