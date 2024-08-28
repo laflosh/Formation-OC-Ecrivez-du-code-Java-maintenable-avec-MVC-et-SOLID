@@ -6,22 +6,7 @@ import java.util.List;
 import com.openclassrooms.cardgame.model.Deck;
 import com.openclassrooms.cardgame.model.Player;
 import com.openclassrooms.cardgame.model.PlayingCard;
-
-class View {
-	
-	public void something() {
-		
-		
-		
-	};
-	
-	public void setController(GameController gc) {
-		
-		
-		
-	};
-	
-}
+import com.openclassrooms.cardgame.view.View;
 
 public class GameController {
 
@@ -53,18 +38,18 @@ public class GameController {
 		
 		while(gameState == GameState.AddingPlayers) {
 			
-			view.something();
+			view.promptForPlayerName();
 			
 		}
 		
 		switch(gameState) {
 		
 		case CardsDealt:
-			view.something();
+			view.promptForFlip();
 			break;
 			
 		case WinnerRevealed:
-			view.something();
+			view.promptForNewGame();
 			break;
 		}
 	}
@@ -74,7 +59,7 @@ public class GameController {
 		if(gameState == GameState.AddingPlayers) {
 			
 			players.add(new Player(playerName));
-			view.something();
+			view.showPlayerName(players.size(), playerName);
 			
 		}
 		
@@ -86,10 +71,12 @@ public class GameController {
 			
 			deck.shuffle();
 			
+			int playerIndex = 1;
+			
 			for(Player player : players) {
 				
 				player.addCardToHand(deck.removeTopCard());
-				view.something();
+				view.showFaceDownCardForPlayer(playerIndex++, player.getName());
 				
 			}
 			
@@ -103,11 +90,13 @@ public class GameController {
 	
 	public void flipCards() {
 		
+		int playerIndex = 1;
+		
 		for(Player player : players) {
 			
 			PlayingCard pc = player.getCard(0);
 			pc.flip();
-			view.something();
+			view.showCardForPlayer(playerIndex++, player.getName(), pc.getRank().toString(), pc.getSuit().toString());
 			
 		}
 		
@@ -176,7 +165,7 @@ public class GameController {
 	
 	void displayWinner() {
 		
-		view.something();
+		view.showWinner(winner.getName());
 		
 	}
 	
