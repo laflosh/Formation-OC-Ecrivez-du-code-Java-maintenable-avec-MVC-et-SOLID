@@ -2,6 +2,7 @@ package com.openclassrooms.cardgame.model;
 
 public enum Rank {
 
+	NONE(0),
 	TWO(2),
 	THREE(3),
 	FOUR(4),
